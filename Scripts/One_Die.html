@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Throw one die</title>
+	<script type="text/javascript">
+		var cwidth = 400;//canvas width
+		var cheight = 300;//canvas height
+		var dicex = 50;//pos.x of this die
+		var dicey = 50;//pos.y of this dice
+		var dicewidth =100 ;//width of this die
+		var diceheight = 100;//height of this die
+		var dotrad = 6;//the radius of the article
+		var ctx;//the canvas id
+
+		function init(){
+			var ch = 1+Math.floor(Math.random()*6);
+			drawface(ch);
+		}
+
+		function drawface(n){
+			ctx=document.getElementById("canvas").getContext('2d');
+			ctx.lineWidth = 5;
+			ctx.clearRect(dicex,dicey,dicewidth,diceheight);
+			ctx.strokeRect(dicex,dicey,dicewidth,diceheight);
+			ctx.fillStyle="#009966";
+			switch(n){
+				case 1:
+					Draw1();
+					break;
+				case 2:
+					Draw2();
+					break;
+				case 3:
+					Draw2();
+					Draw1();
+					break;
+				case 4:
+					Draw4();
+					break;
+				case 5:
+					Draw4();
+					Draw1();
+					break;
+				case 6:
+					Draw4();
+					Draw2Mid();
+					break;
+			}
+		}
+
+		function Draw1(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dicex+.5*dicewidth;
+			doty=dicey+.5*diceheight;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+		function Draw2(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dicex+3*dotrad;
+			doty=dicey+3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dicex+dicewidth-3*dotrad;
+			doty=dicey+diceheight-3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+		function Draw4(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dicex+3*dotrad;
+			doty=dicey+3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dicex+dicewidth-3*dotrad;
+			doty=dicey+diceheight-3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			dotx=dicex+3*dotrad;
+			doty=dicey+diceheight-3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dicex+dicewidth-3*dotrad;
+			doty=dicey+3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+		function Draw2Mid(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dicex+3*dotrad;
+			doty=dicey+.5*diceheight;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dicex+dicewidth-3*dotrad;
+			doty=dicey+.5*diceheight;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+	</script>
+</head>
+<body onLoad="init();">
+<canvas id="canvas" width="400" height="300">
+	Canvas of one die game!<br/>
+</canvas>
+</body>
+</html>

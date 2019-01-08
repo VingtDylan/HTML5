@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>craps game</title>
+	<script type="text/javascript">
+		var cwidth = 400;//canvas width
+		var cheight = 300;//canvas height
+		var dicex = 50;//pos.x of this die
+		var dicey = 50;//pos.y of this dice
+		var dicewidth =100 ;//width of this die
+		var diceheight = 100;//height of this die
+		var dotrad = 6;//the radius of the article
+		var ctx;//the canvas id
+		var dx;//horizontal offset
+		var dy;//vertical offset
+		var firstturn =true;
+		var point;
+		var clickcount=0;
+		const Win={
+			win:1,
+			process:2,
+			lose:3,
+		};
+		var wincheck=Win.process;
+
+		function Throwdice(){
+			clickcount++;
+			if(clickcount>=3&&(wincheck==Win.process)||(wincheck==Win.lose)){
+				alert("你已经凉了");
+				clickcount=0;
+				firstturn=true;
+				document.f.outcome.value="Lose the game!";
+				document.f.stage.value="Back to first throw.";
+				document.f.pv.value=" ";
+			}else if(wincheck==Win){
+				wincheck=Win.process;
+			}
+			var sum;
+			var ch = 1+Math.floor(Math.random()*6);
+			sum=ch;
+			dx=dicex;
+			dy=dicey;
+			drawface(ch);
+			dx=dicex+150;
+			ch = 1+Math.floor(Math.random()*6);
+			sum+=ch;
+			drawface(ch);
+			if(firstturn){
+				switch(sum){
+					case 7:
+					case 11:
+						wincheck=Win.win;
+						document.f.outcome.value="Win the game!";
+						break;
+					case 2:
+					case 3:
+					case 12:
+						wincheck=Win.lose;
+						document.f.outcome.value="Lose the game!";
+						break;
+					default:
+						point=sum;
+						document.f.pv.value=point;
+						firstturn=false;
+						document.f.stage.value="Need follow-up throw.";
+						document.f.outcome.value=" ";
+				}
+			}else{
+				switch(sum){
+					case point:
+						wincheck=Win.win;
+						document.f.outcome.value="Win the game!";
+						document.f.stage.value="Back to first throw.";
+						document.f.pv.value=" ";
+						firstturn=true;
+						break;
+					case 7:
+						wincheck=Win.lose;
+						document.f.outcome.value="Lose the game!";
+						document.f.stage.value="Back to first throw.";
+						document.f.pv.value=" ";
+						firstturn=true;
+						break;
+				}
+			}
+		}
+
+		function drawface(n){
+			ctx=document.getElementById("canvas").getContext('2d');
+			ctx.lineWidth = 5;
+			ctx.clearRect(dx,dy,dicewidth,diceheight);
+			ctx.strokeRect(dx,dy,dicewidth,diceheight);
+			ctx.fillStyle="#009966";
+			switch(n){
+				case 1:
+					Draw1();
+					break;
+				case 2:
+					Draw2();
+					break;
+				case 3:
+					Draw2();
+					Draw1();
+					break;
+				case 4:
+					Draw4();
+					break;
+				case 5:
+					Draw4();
+					Draw1();
+					break;
+				case 6:
+					Draw4();
+					Draw2Mid();
+					break;
+			}
+		}
+
+		function Draw1(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dx+.5*dicewidth;
+			doty=dy+.5*diceheight;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+		function Draw2(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dx+3*dotrad;
+			doty=dy+3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dx+dicewidth-3*dotrad;
+			doty=dy+diceheight-3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+		function Draw4(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dx+3*dotrad;
+			doty=dy+3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dx+dicewidth-3*dotrad;
+			doty=dy+diceheight-3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+			ctx.beginPath();
+			dotx=dx+3*dotrad;
+			doty=dy+diceheight-3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dx+dicewidth-3*dotrad;
+			doty=dy+3*dotrad;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+		function Draw2Mid(){
+			var dotx;
+			var doty;
+			ctx.beginPath();
+			dotx=dx+3*dotrad;
+			doty=dy+.5*diceheight;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			dotx=dx+dicewidth-3*dotrad;
+			doty=dy+.5*diceheight;
+			ctx.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+			ctx.closePath();
+			ctx.fill();
+		}
+
+	</script>
+</head>
+<body>
+<canvas id="canvas" width="400" height="300">
+	Canvas of one die game!<br/>
+</canvas><br/>
+<button onClick="Throwdice();">Throw dice</button>
+<form name="f">
+	Stage:<input type="text" name="stage" value="First Throw"/>
+	Point:<input type="text" name="pv" value=" "/>
+	Outcome:<input type="text" name="outcome" value=" "/>
+	<input type="submit" value="Throw Dice"/>
+</form>
+</body>
+</html>
