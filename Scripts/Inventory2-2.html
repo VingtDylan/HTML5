@@ -1,0 +1,28 @@
+<!-- ---------------------------------------------------------------------------------
+ @Author:	  VingtDylan
+ @DateTime:	2019-01-09 19:39:59
+ @Description: cyh loves wmy.
+ @Email: 1205373709@qq.com
+ PS: Coding just for fun.
+--------------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inventory2-2->eclapsed</title>
+	<script type="text/javascript">
+		function init(){
+			setInterval(increase,1000);
+			//clearInterval
+		}
+		function increase(){
+			document.f.secs.value=String(1+Number(document.f.secs.value));
+		}
+	</script>
+</head>
+<body onLoad="init();">
+	<form name="f">
+		<input type="text" name="secs" value="0"/>
+	</form>
+</body>
+</html>

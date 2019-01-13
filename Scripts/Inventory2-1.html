@@ -1,0 +1,29 @@
+<!-- ---------------------------------------------------------------------------------
+ @Author:	  VingtDylan
+ @DateTime:	2019-01-09 19:36:04
+ @Description: cyh loves wmy.
+ @Email: 1205373709@qq.com
+ PS: Coding just for fun.
+--------------------------------------------------------------------------------- -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inventory2-1</title>
+	<script type="text/javascript">
+		var img=new Image();
+		img.src="../Resources/plane.jpg";
+		var ctx;
+		function init(){
+			ctx=document.getElementById("canvas").getContext('2d');
+			ctx.drawImage(img,10,20,100,100);
+		}
+	</script>
+</head>
+<body>
+	<body onLoad="init();">
+	<canvas id="canvas" width="400" height="300">
+		Newer Canvas;
+	</canvas>
+</body>
+</html>

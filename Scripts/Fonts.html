@@ -1,0 +1,35 @@
+<!--
+---------------------------------------------------------------------------------
+ @Author:	  VingtDylan
+ @DateTime:	2019-01-13 23:54:12
+ @Description: cyh loves wmy.
+ @Email: 1205373709@qq.com
+ PS: Coding just for fun.
+---------------------------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fonts</title>
+	<script type="text/javascript">
+		var ctx;
+		function init(){
+			ctx=document.getElementById("canvas").getContext("2d");
+			ctx.font="15px Lucida Handwriting";
+			ctx.fillText("this is Lucida Handwriting",10,20);
+			ctx.font="italic 30px HarlemNights";
+			ctx.fillText("italic HarlemNights",40,80);
+			ctx.font="bold 40px HarlemNights";
+			ctx.fillText("HarlemNights",100,200);
+			ctx.font="30px Accent";
+			ctx.fillText("Accent",200,300);
+		}
+	</script>
+</head>
+<body onLoad="init();">
+	<canvas id="canvas" width="900" height="400">
+		New Canvas!;
+	</canvas>
+</body>
+</html>
