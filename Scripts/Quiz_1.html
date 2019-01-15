@@ -63,10 +63,29 @@
 		function setupGame(){
 			var mx=col1;
 			var my=row1;
+			for(var i=0;i<facts.length;i++){
+				facts[i][2]=false;
+			}
+			for(var i=0;i<nq;i++){
+				slots[i]=-100;
+			}
+			for(var i=0;i<nq;i++){
+				do{
+					c=Math.floor(Math.random()*facts.length);
+				}while(facts[c][2]==true);
+				facts[c][2]=true;
+				uniqueid="c"+String(c);
+				d=document.createElement('country');
+				d.innerHTML=("<div class='thing' id='"+uniqueid+"'>placeholder</div>");
+				document.body.appendChild(d);
+				thingelem=document.getElementById(uniqueid);
+			}
 		}
+
 	</script>
 </head>
 <body>
-
+	emmmm
 </body>
 </html>
+
